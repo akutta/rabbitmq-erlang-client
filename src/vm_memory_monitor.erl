@@ -309,10 +309,10 @@ get_process_memory_using_strategy(erlang, _State) ->
 get_total_memory_from_os() ->
     try
         get_total_memory(os:type())
-    catch _:Error ->
+    catch _:Error:StackTrace ->
             rabbit_log:warning(
               "Failed to get total system memory: ~n~p~n~p~n",
-              [Error, erlang:get_stacktrace()]),
+              [Error, StackTrace]),
             unknown
     end.
 
